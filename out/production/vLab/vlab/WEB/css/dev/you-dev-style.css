@@ -1,67 +1,67 @@
-#jsLab {
-    width: 400px;
-    /*border: 2px solid #000;*/
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(214, 217, 223);
-    position: relative;
-}
+/*#jsLab {*/
+/*    width: 400px;*/
+/*    !*border: 2px solid #000;*!*/
+/*    border-radius: 3px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    background-color: rgb(214, 217, 223);*/
+/*    position: relative;*/
+/*}*/
 
-h1, ul, ol, p {
-    margin: 0;
-    padding: 0;
-}
+/*h1, ul, ol, p {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
-h1 {
-    font-size: 18px;
-    text-align: center;
-}
+/*h1 {*/
+/*    font-size: 18px;*/
+/*    text-align: center;*/
+/*}*/
 
-ul, ol {
-    padding-left: 25px;
-    padding-top: 7px;
-}
+/*ul, ol {*/
+/*    padding-left: 25px;*/
+/*    padding-top: 7px;*/
+/*}*/
 
-.input_data, .output_info, .output_data {
-    /*border: 2px solid tomato;*/
-    margin-bottom: 20px;
-    display: inline-block;
-    vertical-align: top;
-}
+/*.input_data, .output_info, .output_data {*/
+/*    !*border: 2px solid tomato;*!*/
+/*    margin-bottom: 20px;*/
+/*    display: inline-block;*/
+/*    vertical-align: top;*/
+/*}*/
 
-.output_data {
-    position: absolute;
-    right: 25px;
-    bottom: -3px;
-}
+/*.output_data {*/
+/*    position: absolute;*/
+/*    right: 25px;*/
+/*    bottom: -3px;*/
+/*}*/
 
-.output_data > ul {
-    list-style-type: none;
-    padding-left: 7px;
-}
+/*.output_data > ul {*/
+/*    list-style-type: none;*/
+/*    padding-left: 7px;*/
+/*}*/
 
-.output_data input[type="text"] {
-    width: 75px;
-}
+/*.output_data input[type="text"] {*/
+/*    width: 75px;*/
+/*}*/
 
-.descr {
-    /*font-style: italic;*/
-    font-weight: bold;
-    text-decoration: underline;
-    padding: 7px 10px 0;
-}
+/*.descr {*/
+/*    !*font-style: italic;*!*/
+/*    font-weight: bold;*/
+/*    text-decoration: underline;*/
+/*    padding: 7px 10px 0;*/
+/*}*/
 
-.descr > input[type="button"] {
-    position: absolute;
-    right: 0;
-    padding: 2px 5px 2px;
-    /*background-color: red;*/
-    /*border-radius: 5px;*/
-}
+/*.descr > input[type="button"] {*/
+/*    position: absolute;*/
+/*    right: 0;*/
+/*    padding: 2px 5px 2px;*/
+/*    !*background-color: red;*!*/
+/*    !*border-radius: 5px;*!*/
+/*}*/
 
-.descr > input[value = "Rnd"] {
-    position: static;
-    margin-left: 5px;
-    /*left: 5px;*/
-}
+/*.descr > input[value = "Rnd"] {*/
+/*    position: static;*/
+/*    margin-left: 5px;*/
+/*    !*left: 5px;*!*/
+/*}*/
