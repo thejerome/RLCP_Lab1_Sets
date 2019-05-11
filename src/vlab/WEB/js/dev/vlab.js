@@ -1,26 +1,54 @@
-var Vlab = {
+function init_lab() {
+    const byDefault = {
+        A: [7, 8, 9, 5],
+        B: [9, 5, 2],
+        C: [5, 2],
+        D: [4, 9, 6]
+    };
 
-    div : null,
+    function get_variant() {
+        var variant;
+        if ($("#preGeneratedCode") !== null) {
+            variant = parse_variant($("#preGeneratedCode").val(), default_var);
+        } else {
+            variant = byDefault;
+            console.log(variant.A);
+        }
+        return variant;
+    }
 
-    setVariant : function(str){},
-    setPreviosSolution: function(str){},
-    setMode: function(str){},
+    function parse_variant(str, def_obj) {
+        var parse_str;
+        if (typeof str === 'string' && str !== "") {
+            try {
+                parse_str = str.replace(/<br\/>/g, "\r\n").replace(/&amp;/g, "&").replace(/&quot;/g, "\"").replace(/&lt;br\/&gt;/g, "\r\n")
+                    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&minus;/g, "-").replace(/&apos;/g, "\'").replace(/&#0045;/g, "-");
+                parse_str = JSON.parse(parse_str);
+            } catch (e) {
+                if (def_obj){
+                    parse_str = def_obj;
+                } else {
+                    parse_str = false;
+                }
+            }
+        } else {
+            if (def_obj){
+                parse_str = def_obj;
+            } else {
+                parse_str = false;
+            }
+        }
+        return parse_str;
+    }
 
-    //Инициализация ВЛ
-    init : function(){
-        this.div = document.getElementById("jsLab");
-        this.div.innerHTML = this.window;
-        document.getElementById("tool").innerHTML = this.tool;
-
-        //получение варианта задания
-        var ins = document.getElementById("preGeneratedCode").value;
-    },
-
-    getCondition: function(){},
-    getResults: function(){},
-    calculateHandler: function(text, code){},
+    return {
+        init: function () {
+            lab_var = get_variant();
+        },
+        calculateHandler: function (text, code) {},
+        getResults: function () { return "results"},
+        getCondition: function () {}
+    }
 }
 
-window.onload = function() {
-    Vlab.init();
-};
+var Vlab = init_lab();
