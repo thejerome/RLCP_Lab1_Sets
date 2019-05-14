@@ -18,7 +18,6 @@ function init_lab() {
     function get_variant() {
         let variant;
         if ($("#preGeneratedCode")[0] !== null) {
-            variant = $("#preGeneratedCode")[0].value;
             variant = parse_variant($("#preGeneratedCode")[0].value, byDefault);
         } else {
             variant = byDefault;
@@ -60,6 +59,37 @@ function init_lab() {
         }
     }
 
+    function openModal(numOfSet) {
+        let currAnswer = [];
+        try {
+            switch(numOfSet) {
+                case 1:
+                    currAnswer = answers.answer1;
+                break;
+                case 2:
+                    currAnswer = answers.answer2;
+                break;
+                case 3: 
+                    currAnswer = answers.answer3;
+                break;
+                default:
+                return false;
+            }
+        }
+        catch (e) {
+            return false;
+        }
+        let universe = $("#modal input[type=checkbox]");
+        universe.prop('checked', false);
+            for (let i = 0; i < currAnswer.length; i++) {
+                universe[currAnswer[i] - 1].checked = true;
+            }
+        $('#putAnswer1')[0].disabled = true;
+        $('#putAnswer2')[0].disabled = true;
+        $('#putAnswer3')[0].disabled = true;
+        $('#modal')[0].style.display = 'inline-block';
+    }
+
     return {
         setVariant : function(str){},
         setPreviosSolution: function(str){},
@@ -96,121 +126,89 @@ function init_lab() {
                         '</li>' +
                     '</ul>' +
                 '</div>' +
-                '<div id = "modal_first" style="border: 1px solid black; display: inline-block;">' +
-                '<table>' +
-                '<tr>' +
-                '<td><label>1. <input type="checkbox" id="1" name = "element_first"></label></td>' +
-                '<td><label>2. <input type="checkbox" id="2" name = "element_first"></label></td>' +
-                '<td><label>3. <input type="checkbox" id="3" name = "element_first"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>4. <input type="checkbox" id="4" name = "element_first"></label></td>' +
-                '<td><label>5. <input type="checkbox" id="5" name = "element_first"></label></td>' +
-                '<td><label>6. <input type="checkbox" id="6" name = "element_first"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>7. <input type="checkbox" id="7" name = "element_first"></label></td>' +
-                '<td><label>8. <input type="checkbox" id="8" name = "element_first"></label></td>' +
-                '<td><label>9. <input type="checkbox" id="9" name = "element_first"></label></td>' +
-                '</tr>' +
-                '</table>' +
-                '<input type="button" value="OK" id = "modalShutter_first">' +
-                '</div>' +
-                '' +
-                '<div id = "modal_second" style="border: 1px solid black; display: inline-block;">' +
-                '<table>' +
-                '<tr>' +
-                '<td><label>1. <input type="checkbox" id="1" name = "element_second"></label></td>' +
-                '<td><label>2. <input type="checkbox" id="2" name = "element_second"></label></td>' +
-                '<td><label>3. <input type="checkbox" id="3" name = "element_second"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>4. <input type="checkbox" id="4" name = "element_second"></label></td>' +
-                '<td><label>5. <input type="checkbox" id="5" name = "element_second"></label></td>' +
-                '<td><label>6. <input type="checkbox" id="6" name = "element_second"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>7. <input type="checkbox" id="7" name = "element_second"></label></td>' +
-                '<td><label>8. <input type="checkbox" id="8" name = "element_second"></label></td>' +
-                '<td><label>9. <input type="checkbox" id="9" name = "element_second"></label></td>' +
-                '</tr>' +
-                '</table>' +
-                '<input type="button" value="OK" id = "modalShutter_second">' +
-                '</div>' +
-                '' +
-                '<div id = "modal_third" style="border: 1px solid black; display: inline-block;">' +
-                '<table>' +
-                '<tr>' +
-                '<td><label>1. <input type="checkbox" id="1" name = "element_third"></label></td>' +
-                '<td><label>2. <input type="checkbox" id="2" name = "element_third"></label></td>' +
-                '<td><label>3. <input type="checkbox" id="3" name = "element_third"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>4. <input type="checkbox" id="4" name = "element_third"></label></td>' +
-                '<td><label>5. <input type="checkbox" id="5" name = "element_third"></label></td>' +
-                '<td><label>6. <input type="checkbox" id="6" name = "element_third"></label></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td><label>7. <input type="checkbox" id="7" name = "element_third"></label></td>' +
-                '<td><label>8. <input type="checkbox" id="8" name = "element_third"></label></td>' +
-                '<td><label>9. <input type="checkbox" id="9" name = "element_third"></label></td>' +
-                '</tr>' +
-                '</table>' +
-                '<input type="button" value="OK" id = "modalShutter_third">' +
+                '' + 
+                '<div id = "modal" style="border: 1px solid black; display: inline-block;">' +
+                    '<table>' +
+                        '<tr>' +
+                            '<td><label>1. <input type="checkbox" id="1"></label></td>' +
+                            '<td><label>2. <input type="checkbox" id="2"></label></td>' +
+                            '<td><label>3. <input type="checkbox" id="3"></label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td><label>4. <input type="checkbox" id="4"></label></td>' +
+                            '<td><label>5. <input type="checkbox" id="5"></label></td>' +
+                            '<td><label>6. <input type="checkbox" id="6"></label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td><label>7. <input type="checkbox" id="7"></label></td>' +
+                            '<td><label>8. <input type="checkbox" id="8"></label></td>' +
+                            '<td><label>9. <input type="checkbox" id="9"></label></td>' +
+                        '</tr>' +
+                    '</table>' +
+                    '<input type="button" value="OK" id = "modalShutter">' +
                 '</div>';
-                // '<div class = "input_data"><p class = "descr">Исходные данные <input type="button" value="Rnd" onclick = "setNewVariant()"></p>' +
             let container = $("#jsLab")[0];
             container.innerHTML = content;
-            $("#modal_first")[0].style.display = 'none';
-            $("#modal_second")[0].style.display = 'none';
-            $("#modal_third")[0].style.display = 'none';
+            $("#modal")[0].style.display = 'none';
 
-            $("#putAnswer1").onclick = function() {
-                $("#modal_first")[0].style.display = 'inline-block';
-                $("#modalShutter_first")[0].addEventListener('click', function(){
-                    let universe_first = document.getElementsByName("element_first");
-                    answers.answer1 = [];
-                    for (let i = 0; i < universe_first.length; i++) {
-                        if (universe_first[i].checked) {
-                            answers.answer1.push(i + 1);
-                        }
+            let currSet;
+            $("#modalShutter").on('click', function() {
+                let universeChecked = $("#modal input[type=checkbox]");
+                let set = [];
+                for (let i = 0; i < universeChecked.length; i++) {
+                    if (universeChecked[i].checked) {
+                        set.push(i + 1);
                     }
-                    $("#answer1")[0].value = "{" + getSetFormatted(answers.answer1) +"}";
-                    $("#modal_first")[0].style.display = 'none';}, false);
-            };
+                }
+                try {
+                    switch(currSet) {
+                        case 1:
+                            answers.answer1 = set;
+                            $("#answer1")[0].value = "{" + getSetFormatted(set) +"}";
+                        break;
+                        case 2:
+                            answers.answer2 = set;
+                            $("#answer2")[0].value = "{" + getSetFormatted(set) +"}";
+                        break;
+                        case 3:                    
+                            answers.answer3 = set;
+                            $("#answer3")[0].value = "{" + getSetFormatted(set) +"}";
+                        break;
+                        default:
+                        return false;
+                    }
+                }
+                catch (e) {
+                    return false;
+                }
+                $('#modal')[0].style.display = 'none';
+                $('#putAnswer1')[0].disabled = false;
+                $('#putAnswer2')[0].disabled = false;
+                $('#putAnswer3')[0].disabled = false;
+            });
 
-            $("#putAnswer2")[0].onclick = function() {
-                $("#modal_second")[0].style.display = 'inline-block';
-                $("#modalShutter_second")[0].addEventListener('click', function(){
-                    let universe_second = document.getElementsByName("element_second");
-                    answers.answer2 = [];
-                    for (let i = 0; i < universe_second.length; i++) {
-                        if (universe_second[i].checked) {
-                            answers.answer2.push(i + 1);
-                        }
-                    }
-                    $("#answer2")[0].value = "{" + getSetFormatted(answers.answer2) +"}";
-                    $("#modal_second")[0].style.display = 'none';}, false);
-            };
+            $('#putAnswer1').on('click', function() {
+                currSet = 1;
+                openModal(currSet);
+            });
+            
+            $('#putAnswer2').on('click', function() {
+                currSet = 2;
+                openModal(currSet);
+            });
 
-            $("#putAnswer3")[0].onclick = function() {
-                $("#modal_third")[0].style.display = 'inline-block';
-                $("#modalShutter_third")[0].addEventListener('click', function(){
-                    let universe_third = document.getElementsByName("element_third");
-                    answers.answer3 = [];
-                    for (let i = 0; i < universe_third.length; i++) {
-                        if (universe_third[i].checked) {
-                            answers.answer3.push(i + 1);
-                        }
-                    }
-                    $("#answer3")[0].value = "{" + getSetFormatted(answers.answer3) +"}";
-                    $("#modal_third")[0].style.display = 'none';}, false);
-            };
+            $('#putAnswer3').on('click', function() {
+                currSet = 3;
+                openModal(currSet);
+            });
+
         },
         calculateHandler: function (text, code) {},
-        getResults: function () { return "results"},
+        getResults: function () {
+            return answers;
+        },
         getCondition: function () {}
-    }
+    };
 }
 
 var Vlab = init_lab();
