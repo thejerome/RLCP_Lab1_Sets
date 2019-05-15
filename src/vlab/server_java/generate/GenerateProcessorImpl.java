@@ -10,34 +10,6 @@ import rlcp.server.processor.generate.GenerateProcessor;
 public class GenerateProcessorImpl implements GenerateProcessor {
     static Random random = new Random();
 
-    @Override
-    public GeneratingResult generate(String condition) {
-        JSONObject variant = new JSONObject();
-        int[] A = getSet();
-        int[] B = getSet();
-        int[] C = getSet();
-        int[] D = getSet();
-
-        variant.put("A", A);
-        variant.put("B", B);
-        variant.put("C", C);
-        variant.put("D", D);
-
-        String expression1 = createExpression();
-        String expression2 = createExpression();
-        String expression3 = createExpression();
-
-        variant.put("expr1", expression1);
-        variant.put("expr2", expression2);
-        variant.put("expr3", expression3);
-
-        String text = "Ваш вариант загружен в установку";
-        String code = variant.toString();
-        String instructions = "Выполните операции над множествами. Внесите результирующие множества в соответстующий блок.";
-
-        return new GeneratingResult(text, code, instructions);
-    }
-
     private static int getRandomIntegerBetween(int a, int b) {
         return (a + random.nextInt(b - a + 1));
     }
@@ -106,5 +78,37 @@ public class GenerateProcessorImpl implements GenerateProcessor {
             case 9:
                 return "\\";//minus
         }
+    }
+
+    @Override
+    public GeneratingResult generate(String condition) {
+        String text = "";
+        String code = "";
+        String instructions = "";
+
+        JSONObject variant = new JSONObject();
+        int[] A = getSet();
+        int[] B = getSet();
+        int[] C = getSet();
+        int[] D = getSet();
+
+        variant.put("A", A);
+        variant.put("B", B);
+        variant.put("C", C);
+        variant.put("D", D);
+
+        String expression1 = createExpression();
+        String expression2 = createExpression();
+        String expression3 = createExpression();
+
+        variant.put("expr1", expression1);
+        variant.put("expr2", expression2);
+        variant.put("expr3", expression3);
+
+        text = "Ваш вариант загружен в установку";
+        code = variant.toString();
+        instructions = "Выполните операции над множествами. Внесите результирующие множества в соответстующий блок.";
+
+        return new GeneratingResult(text, code, instructions);
     }
 }
