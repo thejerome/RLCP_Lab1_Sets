@@ -206,32 +206,38 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
             int[] trueAnswer1 = getResultSet(expr1, A, B, C, D);
             int[] trueAnswer2 = getResultSet(expr2, A, B, C, D);
             int[] trueAnswer3 = getResultSet(expr3, A, B, C, D);
+
             double trueAnswers = 0.0;
             if (Arrays.equals(answer1, trueAnswer1)) {
                 trueAnswers += 1.0;
             }
             else {
-                comment += "Неверное значение первого множества. Ожидается ответ " + getSetFormatted(trueAnswer1) + ". ";
+                comment += "Неверное значение первого множества. Ваш ответ " + getSetFormatted(answer1) + ". Ожидался ответ " + getSetFormatted(trueAnswer1) + ". ";
             }
             if (Arrays.equals(answer2, trueAnswer2)) {
                 trueAnswers += 1.0;
             }
             else {
-                comment += "Неверное значение второго множества. Ожидается ответ " + getSetFormatted(trueAnswer2) + ". ";
+                comment += "Неверное значение второго множества. Ваш ответ " + getSetFormatted(answer2) + ". Ожидался ответ " + getSetFormatted(trueAnswer2) + ". ";
             }
             if (Arrays.equals(answer3, trueAnswer3)) {
                 trueAnswers += 1.0;
             }
             else {
-                comment += "Неверное значение третьего множества. Ожидается ответ " + getSetFormatted(trueAnswer3) + ".";
+                comment += "Неверное значение третьего множества. Ваш ответ " + getSetFormatted(answer3) + ". Ожидался ответ " + getSetFormatted(trueAnswer3) + ".";
             }
 
             points = new BigDecimal(Math.round((trueAnswers / 3.0) * 100.0) / 100.0);
+            if (points.compareTo(new BigDecimal("1.0")) == 0){
+                comment = "Решение верно";
+            }
         }
         catch(Exception e) {
             points = new BigDecimal(1.0);
             comment = "Failed, " + e.getMessage();
         }
+
+
 
         return new CheckingSingleConditionResult(points, comment);
     }

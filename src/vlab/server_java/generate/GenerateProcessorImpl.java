@@ -107,7 +107,7 @@ public class GenerateProcessorImpl implements GenerateProcessor {
 
         text = "Ваш вариант загружен в установку";
         code = variant.toString();
-        instructions = "Выполните операции над множествами. Внесите результирующие множества в соответстующий блок.";
+        instructions = "";
 
         return new GeneratingResult(text, code, instructions);
     }

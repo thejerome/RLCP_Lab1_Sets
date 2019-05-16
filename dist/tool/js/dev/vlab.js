@@ -53,7 +53,7 @@ function init_lab() {
             for (let i = 0; i < set.length; i++) {
                 formatted_str += set[i] + "; ";
             }
-            return formatted_str.substring(0, formatted_str.length - 2);
+            return "{" + formatted_str.substring(0, formatted_str.length - 2) + "}";
         } catch (e) {
             return set;
         }
@@ -87,7 +87,7 @@ function init_lab() {
         $('#putAnswer1')[0].disabled = true;
         $('#putAnswer2')[0].disabled = true;
         $('#putAnswer3')[0].disabled = true;
-        $('#modal')[0].style.display = 'inline-block';
+        $('#modal')[0].style.display = 'inline-flex';
     }
 
     return {
@@ -97,37 +97,47 @@ function init_lab() {
 
         init: function () {
             let variant = get_variant();
-            let content = '<h1>Операции над множествами</h1>' +
-                '<div class = "input_data"><p class = "descr">Исходные данные</p>' +
-                    '<ul>' +
-                        '<li>A: {' + getSetFormatted(variant.A) + '}</li>' +
-                        '<li>B: {' + getSetFormatted(variant.B) + '}</li>' +
-                        '<li>C: {' + getSetFormatted(variant.C) + '}</li>' +
-                        '<li>D: {' + getSetFormatted(variant.D) + '}</li>' +
+            answers.answer1 = [];
+            answers.answer2 = [];
+            answers.answer3 = [];
+            // console.log($("#previousSolution")[0].value);
+            let content = '' +
+                '<div class = "header">' +
+                    '<h1>Операции над множествами</h1>' +
+                    '<button type="button" class="btn btn-info" id = "infoModalOpener">Справка</button>' +
+                '</div>' +
+                '<div class = "lab-initial">' +
+                    '<h2>Исходные данные</h2>' +
+                    '<ul class="list-group">' +
+                        '<li class="">A: ' + getSetFormatted(variant.A) + '</li>' +
+                        '<li class="">B: ' + getSetFormatted(variant.B) + '</li>' +
+                        '<li class="">C: ' + getSetFormatted(variant.C) + '</li>' +
+                        '<li class="">D: ' + getSetFormatted(variant.D) + '</li>' +
                     '</ul>' +
                 '</div>' +
-                '<div class = "output_info"><p class = "descr">Найти</p>' +
-                    '<ol>' +
+                '<div class = "lab-task">' +
+                    '<h2>Найти</h2>' +
+                    '<ol class="list-group">' +
                         '<li>' + variant.expr1 + '</li>' +
                         '<li>' + variant.expr2 + '</li>' +
                         '<li>' + variant.expr3 + '</li>' +
                     '</ol>' +
                 '</div>' +
-                '<div class = "output_data">' +
-                    '<ul>' +
-                        '<li>' +
-                            '<label for="putAnswer1">Ответ 1: <input type = "text" id = "answer1" value = "{}" style="width: 150px;" readonly disabled></label><input type="button" value = "..." id = "putAnswer1"">' +
-                        '</li>' +
-                        '<li>' +
-                            '<label for="putAnswer2">Ответ 2: <input type = "text" id = "answer2" value = "{}" style="width: 150px;" readonly disabled></label><input type="button" value = "..." id = "putAnswer2">' +
-                        '</li>' +
-                        '<li>' +
-                            '<label for="putAnswer3">Ответ 3: <input type = "text" id = "answer3" value = "{}" style="width: 150px;" readonly disabled></label><input type="button" value = "..." id = "putAnswer3">' +
-                        '</li>' +
-                    '</ul>' +
+                '<div class = "lab-user-answers">' +
+                        '<h2>Ответ</h2>' +
+                        '<ul class="list-group">' +
+                            '<li>' +
+                                '<label for="putAnswer1">Ответ 1: <input type = "text" id = "answer1" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer1"">' +
+                            '</li>' +
+                            '<li>' +
+                                '<label for="putAnswer2">Ответ 2: <input type = "text" id = "answer2" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer2">' +
+                            '</li>' +
+                            '<li>' +
+                                '<label for="putAnswer3">Ответ 3: <input type = "text" id = "answer3" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer3">' +
+                            '</li>' +
+                        '</ul>' +
                 '</div>' +
-                '' + 
-                '<div id = "modal" style="border: 1px solid black; display: inline-block;">' +
+                '<div id = "modal">' +
                     '<table>' +
                         '<tr>' +
                             '<td><label>1. <input type="checkbox" id="1"></label></td>' +
@@ -145,11 +155,20 @@ function init_lab() {
                             '<td><label>9. <input type="checkbox" id="9"></label></td>' +
                         '</tr>' +
                     '</table>' +
-                    '<input type="button" value="OK" id = "modalShutter">' +
+                    '<input class="btn btn-success" type="button" value="OK" id = "modalShutter">' +
+                '</div>' +
+                '<div id = "modalInfo">' +
+                '<p>В блоке <b>Исходные данные</b> приведены исходные множества в формате <i>{a1,a2,...}</i>.</p>' +
+                '<p>В блоке <b>Найти</b> указаны выражения, значения которых необходимо найти.</p>' +
+                '<p>Ответ необходимо ввести в соответствующем блоке с помощью специальных редакторов множеств. Для редактирования множества, пресдтавляющего ответ, нужно нажать на кнопку <b>"..."</b> и выбрать нужные элементы множества в появивщемся диалоге.</p>' +
                 '</div>';
             let container = $("#jsLab")[0];
             container.innerHTML = content;
             $("#modal")[0].style.display = 'none';
+            $("#modalInfo")[0].style.display = 'none';
+            $("#answer1")[0].value = getSetFormatted(answers.answer1);
+            $("#answer2")[0].value = getSetFormatted(answers.answer2);
+            $("#answer3")[0].value = getSetFormatted(answers.answer3);
 
             let currSet;
             $("#modalShutter").on('click', function() {
@@ -164,15 +183,15 @@ function init_lab() {
                     switch(currSet) {
                         case 1:
                             answers.answer1 = set;
-                            $("#answer1")[0].value = "{" + getSetFormatted(set) +"}";
+                            $("#answer1")[0].value = getSetFormatted(set);
                         break;
                         case 2:
                             answers.answer2 = set;
-                            $("#answer2")[0].value = "{" + getSetFormatted(set) +"}";
+                            $("#answer2")[0].value = getSetFormatted(set);
                         break;
                         case 3:                    
                             answers.answer3 = set;
-                            $("#answer3")[0].value = "{" + getSetFormatted(set) +"}";
+                            $("#answer3")[0].value = getSetFormatted(set);
                         break;
                         default:
                         return false;
@@ -185,6 +204,14 @@ function init_lab() {
                 $('#putAnswer1')[0].disabled = false;
                 $('#putAnswer2')[0].disabled = false;
                 $('#putAnswer3')[0].disabled = false;
+            });
+
+            $("#infoModalOpener").on('click', function() {
+                $("#modalInfo")[0].style.display = "block";
+            });
+
+            $("#modalInfo").on('click', function() {
+                $("#modalInfo")[0].style.display = "none";
             });
 
             $('#putAnswer1').on('click', function() {

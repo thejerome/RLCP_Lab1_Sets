@@ -1,67 +1,97 @@
-/*#jsLab {*/
-/*    width: 400px;*/
-/*    !*border: 2px solid #000;*!*/
-/*    border-radius: 3px;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    background-color: rgb(214, 217, 223);*/
-/*    position: relative;*/
-/*}*/
+#jsLab {
+    width: 600px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
 
-/*h1, ul, ol, p {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
+h1 {
+    font-size: 20px;
+}
 
-/*h1 {*/
-/*    font-size: 18px;*/
-/*    text-align: center;*/
-/*}*/
+h2 {
+    font-size: 16px;
+}
 
-/*ul, ol {*/
-/*    padding-left: 25px;*/
-/*    padding-top: 7px;*/
-/*}*/
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-/*.input_data, .output_info, .output_data {*/
-/*    !*border: 2px solid tomato;*!*/
-/*    margin-bottom: 20px;*/
-/*    display: inline-block;*/
-/*    vertical-align: top;*/
-/*}*/
+ol > li {
+    margin-left: 15px;
+}
 
-/*.output_data {*/
-/*    position: absolute;*/
-/*    right: 25px;*/
-/*    bottom: -3px;*/
-/*}*/
+div[class^=lab] {
+    padding: 5px 10px;
+    margin: 5px 0;
+    /*position: relative;*/
+    /*z-index: 1;*/
+}
 
-/*.output_data > ul {*/
-/*    list-style-type: none;*/
-/*    padding-left: 7px;*/
-/*}*/
+.lab-user-answers input[id^=answer] {
+    color: #000;
+    background-color: #fff;
+    border: none;
+    margin-left: 5px;
+}
 
-/*.output_data input[type="text"] {*/
-/*    width: 75px;*/
-/*}*/
+.lab-user-answers input.btn-primary {
+    font-size: 14px;
+    border: none;
+    margin-left: 30px;
+    letter-spacing: 1.5px;
+    background: grey;
+    padding: 6px 10px;
+}
 
-/*.descr {*/
-/*    !*font-style: italic;*!*/
-/*    font-weight: bold;*/
-/*    text-decoration: underline;*/
-/*    padding: 7px 10px 0;*/
-/*}*/
+ul {
+    list-style-type: none;
+}
 
-/*.descr > input[type="button"] {*/
-/*    position: absolute;*/
-/*    right: 0;*/
-/*    padding: 2px 5px 2px;*/
-/*    !*background-color: red;*!*/
-/*    !*border-radius: 5px;*!*/
-/*}*/
+#modal {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: inline-flex;
+    border-radius: 3px;
+    padding: 2px;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    right: 90px;
+    bottom: 20px;
+    z-index: 10;
+}
 
-/*.descr > input[value = "Rnd"] {*/
-/*    position: static;*/
-/*    margin-left: 5px;*/
-/*    !*left: 5px;*!*/
-/*}*/
+#modal label {
+    margin: 2px;
+}
+
+#modal input.btn-success {
+    font-size: 12px;
+    border: none;
+    width: 50px !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+#modalInfo {
+    padding: 5px 5px;
+    text-align: center;
+    width: 65%;
+    border: 1px solid #000;
+    top: 58px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+#modalInfo p {
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: 16px;
+}
