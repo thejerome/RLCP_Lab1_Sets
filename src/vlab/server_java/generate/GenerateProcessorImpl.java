@@ -73,7 +73,7 @@ public class GenerateProcessorImpl implements GenerateProcessor {
             case 5:
             case 6:
             case 7:
-                return "⋂";//intersect
+                return "⋂";//intersection
             case 8:
             case 9:
                 return "\\";//minus

@@ -1,10 +1,12 @@
 #jsLab {
     width: 600px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     position: relative;
-    z-index: 1;
+    border: 1px solid grey;
+    border-radius: 3px;
+    min-height: 460px;
+    max-height: 460px;
 }
 
 h1 {
@@ -15,54 +17,83 @@ h2 {
     font-size: 16px;
 }
 
+h3 {
+    font-size: 14px;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid grey;
+    padding: 10px 10px 7px;
 }
 
-ol > li {
+.header input[type=button] {
+    background-image: -webkit-linear-gradient(top,#5bc0de 0,#2aabd2 100%);
+    background-image: -o-linear-gradient(top,#5bc0de 0,#2aabd2 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#5bc0de),to(#2aabd2));
+    background-image: linear-gradient(to bottom,#5bc0de 0,#2aabd2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2aabd2', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #28a4c9;
+}
+
+div[class^=lab-initial] {
+    padding: 7px 10px 7px;
+}
+
+div[class^=lab-initial] ul {
+    margin-bottom: 0;
+}
+
+div[class^=lab-task] {
+    padding: 7px 10px 7px;
+    border-bottom: 1px solid grey;
+}
+
+div[class^=lab-task] ol > li {
     margin-left: 15px;
 }
 
-div[class^=lab] {
-    padding: 5px 10px;
-    margin: 5px 0;
-    /*position: relative;*/
-    /*z-index: 1;*/
+.lab-answers {
+    padding: 7px 10px 7px;
+
 }
 
-.lab-user-answers input[id^=answer] {
+.lab-answers input[id^=answer] {
     color: #000;
     background-color: #fff;
     border: none;
     margin-left: 5px;
 }
 
-.lab-user-answers input.btn-primary {
-    font-size: 14px;
-    border: none;
-    margin-left: 30px;
-    letter-spacing: 1.5px;
-    background: grey;
-    padding: 6px 10px;
-}
-
 ul {
     list-style-type: none;
 }
 
+.lab-answers input[id^=putAnswer] {
+    font-size: 14px;
+    margin-left: 20px;
+    letter-spacing: 1.5px;
+    padding: 6px 10px;
+}
+
 #modal {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid #000;
     display: inline-flex;
     border-radius: 3px;
     padding: 2px;
     flex-direction: column;
     align-items: center;
     position: absolute;
-    right: 90px;
-    bottom: 20px;
-    z-index: 10;
+    right: 15%;
+    bottom: 10px;
+}
+
+#modal td {
+    vertical-align: middle;
 }
 
 #modal label {
@@ -70,28 +101,40 @@ ul {
 }
 
 #modal input.btn-success {
-    font-size: 12px;
+    font-size: 14px;
+    padding: 4px 10px;
     border: none;
-    width: 50px !important;
-    font-weight: bold;
     text-align: center;
+    margin-bottom: 2px;
 }
 
-#modalInfo {
-    padding: 5px 5px;
-    text-align: center;
-    width: 65%;
-    border: 1px solid #000;
-    top: 58px;
+.btn-success {
+    background-image: -webkit-linear-gradient(top,#5cb85c 0,#419641 100%);
+    background-image: -o-linear-gradient(top,#5cb85c 0,#419641 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#5cb85c),to(#419641));
+    background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff419641', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #3e8f3e;
+}
+
+div[class=info] {
+    padding: 7px 10px 7px;
+}
+
+#infoCloseButton {
     position: absolute;
+    bottom: 10px;
     right: 10px;
-    cursor: pointer;
-}
-
-#modalInfo p {
-    margin-bottom: 5px;
-}
-
-h3 {
-    font-size: 16px;
+    margin-left: auto;
+    background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #dbdbdb;
+    border-color: #ccc;
 }

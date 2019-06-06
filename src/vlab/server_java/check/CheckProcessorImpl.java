@@ -162,13 +162,13 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
     private static int[] getResultBySign(String sign, int[] set_first, int[] set_second) {
         int[] result;
         switch (sign) {
-            case "∪":
+            case "∪"://union
                 result = getUnion(set_first, set_second);
                 break;
-            case "⋂":
+            case "⋂"://intersection
                 result = getIntersection(set_first, set_second);
                 break;
-            case "\\":
+            case "\\"://minus
                 result = getMinus(set_first, set_second);
                 break;
             default:
@@ -187,21 +187,19 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
         String comment = "";
 
         try {
-            String variant_json = generatingResult.getCode();
-            JSONObject variant = new JSONObject(variant_json);
-            int[] A = getIntArrayFromJSON(variant.getJSONArray("A"));
-            int[] B = getIntArrayFromJSON(variant.getJSONArray("B"));
-            int[] C = getIntArrayFromJSON(variant.getJSONArray("C"));
-            int[] D = getIntArrayFromJSON(variant.getJSONArray("D"));
-            String expr1 = variant.getString("expr1");
-            String expr2 = variant.getString("expr2");
-            String expr3 = variant.getString("expr3");
+            JSONObject variant_json = new JSONObject(generatingResult.getCode());
+            int[] A = getIntArrayFromJSON(variant_json.getJSONArray("A"));
+            int[] B = getIntArrayFromJSON(variant_json.getJSONArray("B"));
+            int[] C = getIntArrayFromJSON(variant_json.getJSONArray("C"));
+            int[] D = getIntArrayFromJSON(variant_json.getJSONArray("D"));
+            String expr1 = variant_json.getString("expr1");
+            String expr2 = variant_json.getString("expr2");
+            String expr3 = variant_json.getString("expr3");
 
-            String answers_json = instructions;
-            JSONObject answers = new JSONObject(answers_json);
-            int[] answer1 = getIntArrayFromJSON(answers.getJSONArray("answer1"));
-            int[] answer2 = getIntArrayFromJSON(answers.getJSONArray("answer2"));
-            int[] answer3 = getIntArrayFromJSON(answers.getJSONArray("answer3"));
+            JSONObject answers_json = new JSONObject(instructions);
+            int[] answer1 = getIntArrayFromJSON(answers_json.getJSONArray("answer1"));
+            int[] answer2 = getIntArrayFromJSON(answers_json.getJSONArray("answer2"));
+            int[] answer3 = getIntArrayFromJSON(answers_json.getJSONArray("answer3"));
 
             int[] trueAnswer1 = getResultSet(expr1, A, B, C, D);
             int[] trueAnswer2 = getResultSet(expr2, A, B, C, D);
@@ -236,8 +234,6 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
             points = new BigDecimal(1.0);
             comment = "Failed, " + e.getMessage();
         }
-
-
 
         return new CheckingSingleConditionResult(points, comment);
     }

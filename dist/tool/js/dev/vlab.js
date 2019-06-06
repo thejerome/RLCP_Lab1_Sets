@@ -15,32 +15,25 @@ function init_lab() {
         answer3: []
     };
 
-    function get_variant() {
-        let variant;
-        if ($("#preGeneratedCode")[0] !== null) {
-            variant = parse_variant($("#preGeneratedCode")[0].value, byDefault);
-        } else {
-            variant = byDefault;
-        }
-        return variant;
-    }
-
-    function parse_variant(str, def_obj) {
+    function parseVariant(str, def_obj) {
         let parse_str;
         if (typeof str === 'string' && str !== "") {
             try {
                 parse_str = JSON.parse(str);
-            } catch (e) {
+            }
+            catch (e) {
                 if (def_obj){
                     parse_str = def_obj;
                 } else {
                     parse_str = false;
                 }
             }
-        } else {
+        }
+        else {
             if (def_obj){
                 parse_str = def_obj;
-            } else {
+            }
+            else {
                 parse_str = false;
             }
         }
@@ -91,20 +84,45 @@ function init_lab() {
     }
 
     return {
-        setVariant : function(str){},
-        setPreviosSolution: function(str){},
+        setVariant : function(){
+            let variant;
+            if ($("#preGeneratedCode").val() !== undefined) {
+                variant = parseVariant($("#preGeneratedCode").val(), byDefault);
+            }
+            else {
+                variant = byDefault;
+            }
+            return variant;
+        },
+        setPreviousSolution: function(){
+            let previousSolution;
+            if ($("#previousSolution").val() !== undefined) {
+                try {
+                    previousSolution = JSON.parse($("#previousSolution").val());
+                }
+                catch (e) {}
+            }
+            return previousSolution;
+        },
         setMode: function(str){},
 
         init: function () {
-            let variant = get_variant();
-            answers.answer1 = [];
-            answers.answer2 = [];
-            answers.answer3 = [];
-            // console.log($("#previousSolution")[0].value);
+            let variant = this.setVariant();
+            let previousSolution = this.setPreviousSolution();
+            if (previousSolution !== undefined) {
+                answers.answer1 = previousSolution.answer1;
+                answers.answer2 = previousSolution.answer2;
+                answers.answer3 = previousSolution.answer3;
+            }
+            else {
+                answers.answer1 = [];
+                answers.answer2 = [];
+                answers.answer3 = [];
+            }
             let content = '' +
                 '<div class = "header">' +
                     '<h1>Операции над множествами</h1>' +
-                    '<button type="button" class="btn btn-info" id = "infoModalOpener">Справка</button>' +
+                    '<input type="button" class="btn btn-info" id = "infoModalOpener" value = "Справка">' +
                 '</div>' +
                 '<div class = "lab-initial">' +
                     '<h2>Исходные данные</h2>' +
@@ -123,52 +141,51 @@ function init_lab() {
                         '<li>' + variant.expr3 + '</li>' +
                     '</ol>' +
                 '</div>' +
-                '<div class = "lab-user-answers">' +
+                '<div class = "lab-answers">' +
                         '<h2>Ответ</h2>' +
                         '<ul class="list-group">' +
                             '<li>' +
-                                '<label for="putAnswer1">Ответ 1: <input type = "text" id = "answer1" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer1"">' +
+                                '<label for="putAnswer1">Ответ 1: <input type = "text" id = "answer1" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-outline-dark" type="button" value = "···" id = "putAnswer1"">' +
                             '</li>' +
                             '<li>' +
-                                '<label for="putAnswer2">Ответ 2: <input type = "text" id = "answer2" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer2">' +
+                                '<label for="putAnswer2">Ответ 2: <input type = "text" id = "answer2" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-outline-dark" type="button" value = "···" id = "putAnswer2">' +
                             '</li>' +
                             '<li>' +
-                                '<label for="putAnswer3">Ответ 3: <input type = "text" id = "answer3" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-primary" type="button" value = "···" id = "putAnswer3">' +
+                                '<label for="putAnswer3">Ответ 3: <input type = "text" id = "answer3" value = "{}" style="width: 150px;" readonly disabled></label><input class="btn btn-outline-dark" type="button" value = "···" id = "putAnswer3">' +
                             '</li>' +
                         '</ul>' +
                 '</div>' +
                 '<div id = "modal">' +
                     '<table>' +
                         '<tr>' +
-                            '<td><label>1. <input type="checkbox" id="1"></label></td>' +
-                            '<td><label>2. <input type="checkbox" id="2"></label></td>' +
-                            '<td><label>3. <input type="checkbox" id="3"></label></td>' +
+                            '<td><label>1 <input type="checkbox" id="1"></label></td>' +
+                            '<td><label>2 <input type="checkbox" id="2"></label></td>' +
+                            '<td><label>3 <input type="checkbox" id="3"></label></td>' +
                         '</tr>' +
                         '<tr>' +
-                            '<td><label>4. <input type="checkbox" id="4"></label></td>' +
-                            '<td><label>5. <input type="checkbox" id="5"></label></td>' +
-                            '<td><label>6. <input type="checkbox" id="6"></label></td>' +
+                            '<td><label>4 <input type="checkbox" id="4"></label></td>' +
+                            '<td><label>5 <input type="checkbox" id="5"></label></td>' +
+                            '<td><label>6 <input type="checkbox" id="6"></label></td>' +
                         '</tr>' +
                         '<tr>' +
-                            '<td><label>7. <input type="checkbox" id="7"></label></td>' +
-                            '<td><label>8. <input type="checkbox" id="8"></label></td>' +
-                            '<td><label>9. <input type="checkbox" id="9"></label></td>' +
+                            '<td><label>7 <input type="checkbox" id="7"></label></td>' +
+                            '<td><label>8 <input type="checkbox" id="8"></label></td>' +
+                            '<td><label>9 <input type="checkbox" id="9"></label></td>' +
                         '</tr>' +
                     '</table>' +
-                    '<input class="btn btn-success" type="button" value="OK" id = "modalShutter">' +
+                    '<input class="btn btn-success" type="button" value="Применить" id = "modalShutter">' +
                 '</div>' +
-                '<div id = "modalInfo">' +
-                '<p>В блоке <b>Исходные данные</b> приведены исходные множества в формате <i>{a1,a2,...}</i>.</p>' +
-                '<p>В блоке <b>Найти</b> указаны выражения, значения которых необходимо найти.</p>' +
-                '<p>Ответ необходимо ввести в соответствующем блоке с помощью специальных редакторов множеств. Для редактирования множества, пресдтавляющего ответ, нужно нажать на кнопку <b>"..."</b> и выбрать нужные элементы множества в появивщемся диалоге.</p>' +
+                '<div class = "info">' +
+                    '<h2>Виртуальная лаборатория "Операции над множествами"</h2>' +
+                    '<p>Для выполнения задания виртуальной лаборатории необходимо найти значения множеств из блока «Найти» и ввести их в поля для ответа в соответствующем блоке с помощью специальных редакторов множеств. &nbsp; Для редактирования множества, пресдтавляющего ответ, нужно нажать на кнопку "..." и выбрать нужные элементы множества в появивщемся диалоге. Элементы исходных множеств приведены в блоке "Исходные данные". </p>';
                 '</div>';
             let container = $("#jsLab")[0];
             container.innerHTML = content;
             $("#modal")[0].style.display = 'none';
-            $("#modalInfo")[0].style.display = 'none';
-            $("#answer1")[0].value = getSetFormatted(answers.answer1);
-            $("#answer2")[0].value = getSetFormatted(answers.answer2);
-            $("#answer3")[0].value = getSetFormatted(answers.answer3);
+            $(".info")[0].style.display = 'none';
+            $("#answer1").val(getSetFormatted(answers.answer1));
+            $("#answer2").val(getSetFormatted(answers.answer2));
+            $("#answer3").val(getSetFormatted(answers.answer3));
 
             let currSet;
             $("#modalShutter").on('click', function() {
@@ -183,15 +200,15 @@ function init_lab() {
                     switch(currSet) {
                         case 1:
                             answers.answer1 = set;
-                            $("#answer1")[0].value = getSetFormatted(set);
+                            $("#answer1").val(getSetFormatted(set));
                         break;
                         case 2:
                             answers.answer2 = set;
-                            $("#answer2")[0].value = getSetFormatted(set);
+                            $("#answer2").val(getSetFormatted(set));
                         break;
                         case 3:                    
                             answers.answer3 = set;
-                            $("#answer3")[0].value = getSetFormatted(set);
+                            $("#answer3").val(getSetFormatted(set));
                         break;
                         default:
                         return false;
@@ -206,12 +223,25 @@ function init_lab() {
                 $('#putAnswer3')[0].disabled = false;
             });
 
-            $("#infoModalOpener").on('click', function() {
-                $("#modalInfo")[0].style.display = "block";
-            });
-
-            $("#modalInfo").on('click', function() {
-                $("#modalInfo")[0].style.display = "none";
+            $("#infoModalOpener").on("click", function () {
+                if ($(".info")[0].style.display == "none") {
+                    $(".info")[0].style.display = "block";
+                    this.value = "Закрыть";
+                    $(".lab-initial")[0].style.display = "none";
+                    $(".lab-task")[0].style.display = "none";
+                    $(".lab-answers")[0].style.display = "none";
+                    $("#modal")[0].style.display = 'none';
+                    $('#putAnswer1')[0].disabled = false;
+                    $('#putAnswer2')[0].disabled = false;
+                    $('#putAnswer3')[0].disabled = false;
+                }
+                else {
+                    $(".info")[0].style.display = "none";
+                    this.value = "Справка";
+                    $(".lab-initial")[0].style.display = "block";
+                    $(".lab-task")[0].style.display = "block";
+                    $(".lab-answers")[0].style.display = "block";
+                }
             });
 
             $('#putAnswer1').on('click', function() {

@@ -2,6 +2,6 @@
 <!DOCTYPE ConfigServer SYSTEM "rsc/ConfigServer.dtd">
 <ConfigServer>
 	<Name value ="SomeServer"/>
-	<Port value="3000"/>
+	<Port value="13330"/>
 	<UserInfo login="user" password="user"/>
 </ConfigServer>

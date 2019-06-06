@@ -225,7 +225,8 @@
     <target name="injection.JS">
         <basename file="${file.name}" property="nameJS"/>
         <basename file="${dir.name}" property="dir"/>
-        <echo file="${temp.html}" append="true">&lt;script type="text/javascript" src="js/${dir}/${nameJS}"&gt;&lt;/script&gt;${line.separator}</echo>
+        <basename file="${file.charset}" property="charset"/>
+        <echo file="${temp.html}" append="true">&lt;script type="text/javascript" src="js/${dir}/${nameJS}" charset="${charset}"&gt;&lt;/script&gt;${line.separator}</echo>
     </target>
 
     <target name="injection.CSS">
@@ -279,14 +280,26 @@
                 <exclude name="dev/**/*.js"/>
             </fileset>
             <param name="dir.name" value="lib"/>
+            <param name="file.charset" value="utf-8"/>
         </foreach>
 
         <foreach target="injection.JS" param="file.name">
             <fileset dir="${dir.js.src}" casesensitive="yes">
                 <include name="dev/**/*.js"/>
+                <exclude name="dev/**/*_1251.js"/>
                 <exclude name="lib/**/*.js"/>
             </fileset>
             <param name="dir.name" value="dev"/>
+            <param name="file.charset" value="utf-8"/>
+        </foreach>
+
+        <foreach target="injection.JS" param="file.name">
+            <fileset dir="${dir.js.src}" casesensitive="yes">
+                <include name="dev/**/*_1251.js"/>
+                <exclude name="lib/**/*.js"/>
+            </fileset>
+            <param name="dir.name" value="dev"/>
+            <param name="file.charset" value="windows-1251"/>
         </foreach>
 
         <echo file="${temp.html}" append="true">
