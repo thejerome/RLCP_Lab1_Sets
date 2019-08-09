@@ -69,11 +69,11 @@ public class GenerateProcessorImpl implements GenerateProcessor {
             case 3:
             case 4:
             default:
-                return "∪";//union
+                return "u";//union
             case 5:
             case 6:
             case 7:
-                return "⋂";//intersection
+                return "n";//intersection
             case 8:
             case 9:
                 return "\\";//minus

@@ -38,6 +38,8 @@ function init_lab() {
                 parsedStr = false;
             }
         }
+        parsedStr.replace(/u/g, "\u222a");
+        parsedStr.replace(/n/g, "\u22c2s");
         return parsedStr;
     }
 

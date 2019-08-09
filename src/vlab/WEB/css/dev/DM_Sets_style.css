@@ -7,21 +7,23 @@
     border-radius: 3px;
     min-height: 460px;
     max-height: 460px;
+    text-align: left;
 }
 
-h1 {
+#jsLab h1 {
     font-size: 20px;
 }
 
-h2 {
+#jsLab h2 {
     font-size: 16px;
 }
 
-h3 {
+#jsLab h3 {
     font-size: 14px;
+    font-weight: bold;
 }
 
-.header {
+#jsLab .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +31,7 @@ h3 {
     padding: 10px 10px 7px;
 }
 
-.header input[type=button] {
+#jsLab .header input[type=button] {
     background-image: -webkit-linear-gradient(top,#5bc0de 0,#2aabd2 100%);
     background-image: -o-linear-gradient(top,#5bc0de 0,#2aabd2 100%);
     background-image: -webkit-gradient(linear,left top,left bottom,from(#5bc0de),to(#2aabd2));
@@ -40,47 +42,48 @@ h3 {
     border-color: #28a4c9;
 }
 
-div[class^=lab-initial] {
+#jsLab div[class^=lab-initial] {
     padding: 7px 10px 7px;
 }
 
-div[class^=lab-initial] ul {
+#jsLab div[class^=lab-initial] ul {
     margin-bottom: 0;
 }
 
-div[class^=lab-task] {
+#jsLab div[class^=lab-task] {
     padding: 7px 10px 7px;
     border-bottom: 1px solid grey;
 }
 
-div[class^=lab-task] ol > li {
+#jsLab div[class^=lab-task] ol > li {
     margin-left: 15px;
 }
 
-.lab-answers {
+#jsLab .lab-answers {
     padding: 7px 10px 7px;
 
 }
 
-.lab-answers input[id^=answer] {
+#jsLab .lab-answers input[id^=answer] {
     color: #000;
     background-color: #fff;
     border: none;
     margin-left: 5px;
+    margin-bottom: 5px;
 }
 
-ul {
+#jsLab ul {
     list-style-type: none;
 }
 
-.lab-answers input[id^=putAnswer] {
+#jsLab .lab-answers input[id^=putAnswer] {
     font-size: 14px;
     margin-left: 20px;
     letter-spacing: 1.5px;
     padding: 6px 10px;
 }
 
-#modal {
+#jsLab #modal {
     border: 1px solid #000;
     display: inline-flex;
     border-radius: 3px;
@@ -92,15 +95,15 @@ ul {
     bottom: 10px;
 }
 
-#modal td {
+#jsLab #modal td {
     vertical-align: middle;
 }
 
-#modal label {
+#jsLab #modal label {
     margin: 2px;
 }
 
-#modal input.btn-success {
+#jsLab #modal input.btn-success {
     font-size: 14px;
     padding: 4px 10px;
     border: none;
@@ -108,7 +111,7 @@ ul {
     margin-bottom: 2px;
 }
 
-.btn-success {
+#jsLab .btn-success {
     background-image: -webkit-linear-gradient(top,#5cb85c 0,#419641 100%);
     background-image: -o-linear-gradient(top,#5cb85c 0,#419641 100%);
     background-image: -webkit-gradient(linear,left top,left bottom,from(#5cb85c),to(#419641));
@@ -119,11 +122,11 @@ ul {
     border-color: #3e8f3e;
 }
 
-div[class=info] {
+#jsLab div[class=info] {
     padding: 7px 10px 7px;
 }
 
-#infoCloseButton {
+#jsLab #infoCloseButton {
     position: absolute;
     bottom: 10px;
     right: 10px;

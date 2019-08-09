@@ -19,7 +19,7 @@ function init_lab() {
         let parsedStr;
         if (typeof str === 'string' && str !== "") {
             try {
-                parsedStr = JSON.parse(str);
+                parsedStr = JSON.parse(str.replace(/u/g, "∪").replace(/n/g, "⋂"));
             }
             catch (e) {
                 if (defaultObj){
@@ -38,6 +38,8 @@ function init_lab() {
                 parsedStr = false;
             }
         }
+        parsedStr.replace(/u/g, "∪");
+        parsedStr.replace(/n/g, "⋂");
         return parsedStr;
     }
 
@@ -262,7 +264,7 @@ function init_lab() {
         },
         calculateHandler: function (text, code) {},
         getResults: function () {
-            return answers;
+            return JSON.stringify(answers);
         },
         getCondition: function () {}
     };

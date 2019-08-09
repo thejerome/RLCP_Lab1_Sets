@@ -162,10 +162,10 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
     private static int[] getResultBySign(String sign, int[] set_first, int[] set_second) {
         int[] result;
         switch (sign) {
-            case "∪"://union
+            case "u"://union
                 result = getUnion(set_first, set_second);
                 break;
-            case "⋂"://intersection
+            case "n"://intersection
                 result = getIntersection(set_first, set_second);
                 break;
             case "\\"://minus
@@ -231,8 +231,9 @@ public class CheckProcessorImpl implements PreCheckResultAwareCheckProcessor<Str
             }
         }
         catch(Exception e) {
-            points = new BigDecimal(1.0);
-            comment = "Failed, " + e.getMessage();
+            points = new BigDecimal(0.0);
+            comment = "Server problem, " + e.getMessage();
+            e.printStackTrace();
         }
 
         return new CheckingSingleConditionResult(points, comment);

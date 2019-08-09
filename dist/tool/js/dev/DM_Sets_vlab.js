@@ -38,6 +38,8 @@ function init_lab() {
                 parsedStr = false;
             }
         }
+        parsedStr.replace(/u/g, "∪");
+        parsedStr.replace(/n/g, "⋂");
         return parsedStr;
     }
 

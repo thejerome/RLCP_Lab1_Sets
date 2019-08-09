@@ -19,7 +19,7 @@ function init_lab() {
         let parsedStr;
         if (typeof str === 'string' && str !== "") {
             try {
-                parsedStr = JSON.parse(str);
+                parsedStr = JSON.parse(str.replace(/u/g, "\u222a").replace(/n/g, "\u22c2"));
             }
             catch (e) {
                 if (defaultObj){
@@ -262,7 +262,7 @@ function init_lab() {
         },
         calculateHandler: function (text, code) {},
         getResults: function () {
-            return answers;
+            return JSON.stringify(answers);
         },
         getCondition: function () {}
     };
